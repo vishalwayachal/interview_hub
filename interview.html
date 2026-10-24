@@ -1,0 +1,3144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("interview_theme");
+        if (saved === "light" || saved === "dark") {
+          document.querySelector('meta[name="color-scheme"]').content = saved;
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+        const savedLayout = localStorage.getItem("interview_layout");
+        if (savedLayout === "compact") {
+          document.documentElement.classList.add('preload-compact');
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <title>Interview Prep Hub — 500+ Technical Questions & Answers</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      color-scheme: light dark;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-surface-hover: #e2e8f0;
+      --bg-accent-subtle: #eff6ff;
+
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-body: #334155;
+
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-subtle: #eff6ff;
+      --primary-text: #1d4ed8;
+
+      --success: #10b981;
+      --success-subtle: #ecfdf5;
+      --success-text: #047857;
+
+      --star-color: #f59e0b;
+      --mark-bg: #fef08a;
+      --mark-text: #713f12;
+
+      --code-bg: #090d16;
+      --code-header-bg: #131b2e;
+      --code-text: #e2e8f0;
+      --code-border: #1e293b;
+
+      --tok-keyword: #38bdf8;
+      --tok-string: #4ade80;
+      --tok-comment: #94a3b8;
+      --tok-number: #fbbf24;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+    }
+
+    :root:has(> head > meta[name="color-scheme"][content="dark"]),
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg-page: #080d1a;
+      --bg-surface: #101728;
+      --bg-surface-elevated: #162035;
+      --bg-surface-hover: #1e2c48;
+      --bg-accent-subtle: rgba(56, 189, 248, 0.12);
+
+      --border-subtle: #1e293b;
+      --border-strong: #334155;
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-body: #cbd5e1;
+
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-subtle: rgba(56, 189, 248, 0.14);
+      --primary-text: #38bdf8;
+
+      --success: #34d399;
+      --success-subtle: rgba(16, 185, 129, 0.14);
+      --success-text: #34d399;
+
+      --star-color: #fbbf24;
+      --mark-bg: #78350f;
+      --mark-text: #fef08a;
+
+      --code-bg: #040711;
+      --code-header-bg: #0c1222;
+      --code-text: #f1f5f9;
+      --code-border: #1a233a;
+
+      --tok-keyword: #38bdf8;
+      --tok-string: #4ade80;
+      --tok-comment: #64748b;
+      --tok-number: #fbbf24;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]):not(:has(> head > meta[name="color-scheme"][content="light"])) {
+        color-scheme: dark;
+        --bg-page: #080d1a;
+        --bg-surface: #101728;
+        --bg-surface-elevated: #162035;
+        --bg-surface-hover: #1e2c48;
+        --bg-accent-subtle: rgba(56, 189, 248, 0.12);
+
+        --border-subtle: #1e293b;
+        --border-strong: #334155;
+
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --text-body: #cbd5e1;
+
+        --primary: #38bdf8;
+        --primary-hover: #7dd3fc;
+        --primary-subtle: rgba(56, 189, 248, 0.14);
+        --primary-text: #38bdf8;
+
+        --success: #34d399;
+        --success-subtle: rgba(16, 185, 129, 0.14);
+        --success-text: #34d399;
+
+        --star-color: #fbbf24;
+        --mark-bg: #78350f;
+        --mark-text: #fef08a;
+
+        --code-bg: #040711;
+        --code-header-bg: #0c1222;
+        --code-text: #f1f5f9;
+        --code-border: #1a233a;
+
+        --tok-keyword: #38bdf8;
+        --tok-string: #4ade80;
+        --tok-comment: #64748b;
+        --tok-number: #fbbf24;
+
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+        --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45);
+        --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.55);
+      }
+    }
+
+    /* Base Elements */
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 980px;
+      margin: 18px auto;
+      padding: 0 16px 50px;
+      transition: max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .app-container.compact-mode,
+    .preload-compact .app-container {
+      max-width: 540px;
+    }
+
+    /* Card Wrapper */
+    .main-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      padding: 16px 18px 20px;
+    }
+
+    /* Top Bar Header */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 0.77rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-strong);
+      color: var(--text-main);
+    }
+
+    .action-btn.active,
+    .action-btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff !important;
+    }
+
+    .action-btn-primary:hover {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+
+    .action-btn-success {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff !important;
+    }
+
+    /* Overall Readiness Strip */
+    .readiness-strip {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .readiness-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+    }
+
+    .readiness-label {
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .readiness-stat {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .readiness-stat b {
+      color: var(--text-main);
+    }
+
+    .readiness-bar-wrap {
+      flex: 1;
+      min-width: 130px;
+      max-width: 260px;
+      height: 7px;
+      background: var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .readiness-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #38bdf8);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    /* Search & Filter Toolbar */
+    .search-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .search-input-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .search-icon-prefix {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      pointer-events: none;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 36px 8px 36px;
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-subtle);
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 4px;
+      display: none;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .search-clear-btn:hover {
+      color: var(--text-main);
+    }
+
+    .search-clear-btn.visible {
+      display: flex;
+    }
+
+    /* Search scope & filters row */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-group {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 7px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .pill-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .pill-btn:hover {
+      color: var(--text-main);
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .sort-select {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .quick-tools {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .tool-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .tool-btn:hover {
+      color: var(--text-main);
+      border-color: var(--border-strong);
+    }
+
+    /* Search status banner */
+    .search-status-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 7px;
+      background: var(--primary-subtle);
+      border: 1px solid var(--primary);
+      color: var(--primary-text);
+      font-size: 0.79rem;
+      font-weight: 600;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-status-banner.visible {
+      display: flex;
+    }
+
+    .search-match-pills {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .match-pill-tag {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.72rem;
+      color: var(--text-main);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .match-pill-tag:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Tabs Bar */
+    .tabs-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-tabs-custom {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+      margin: 0;
+      list-style: none;
+    }
+
+    .nav-tabs-custom::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-item-btn {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      font-size: 0.81rem;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-item-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-surface-elevated);
+    }
+
+    .tab-item-btn.active {
+      color: var(--primary-text);
+      background: var(--bg-surface);
+      border-color: var(--border-subtle);
+      border-top: 2px solid var(--primary);
+    }
+
+    .tab-item-btn .badge-count {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 12px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.15s ease;
+    }
+
+    .tab-item-btn.active .badge-count {
+      background: var(--primary-subtle);
+      color: var(--primary-text);
+      border-color: transparent;
+    }
+
+    .tab-item-btn.has-matches .badge-count {
+      background: var(--mark-bg);
+      color: var(--mark-text);
+      border-color: transparent;
+    }
+
+    /* Category Header Banner */
+    .category-header-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-title-text {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .category-progress-text {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Question Cards & Accordion */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .q-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .q-card.is-starred {
+      border-color: rgba(245, 158, 11, 0.45);
+    }
+
+    .q-card.is-mastered {
+      border-left: 4px solid var(--success);
+    }
+
+    .q-header {
+      display: flex;
+      align-items: stretch;
+      background: var(--bg-surface);
+      transition: background-color 0.15s;
+    }
+
+    .q-header:hover {
+      background: var(--bg-surface-elevated);
+    }
+
+    .q-card.is-open .q-header {
+      background: var(--bg-accent-subtle);
+    }
+
+    .q-toggle-btn {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 12px;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.89rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .q-num-badge {
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      margin-top: 1px;
+    }
+
+    .q-card.is-open .q-num-badge {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .q-card.is-mastered .q-num-badge {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+
+    .q-text {
+      flex: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .q-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 5px 8px;
+    }
+
+    .q-action-icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .q-action-icon-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-surface-hover);
+    }
+
+    .q-action-icon-btn.star-btn.starred {
+      color: var(--star-color);
+    }
+
+    .q-action-icon-btn.star-btn.starred svg {
+      fill: var(--star-color);
+      stroke: var(--star-color);
+    }
+
+    .q-action-icon-btn.master-btn.mastered {
+      color: var(--success);
+    }
+
+    .q-action-icon-btn.note-btn.has-note {
+      color: var(--primary);
+    }
+
+    .chevron-icon {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .q-card.is-open .chevron-icon {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    /* Accordion Body */
+    .q-body {
+      display: none;
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-body);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .q-card.is-open .q-body {
+      display: block;
+    }
+
+    .q-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .q-body code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: var(--bg-surface-elevated);
+      color: var(--primary-text);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Personal Notes Section */
+    .q-notes-drawer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .q-notes-textarea {
+      width: 100%;
+      min-height: 55px;
+      padding: 7px 10px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      border-radius: 7px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      outline: none;
+      resize: vertical;
+      transition: border-color 0.15s;
+    }
+
+    .q-notes-textarea:focus {
+      border-color: var(--primary);
+      background: var(--bg-surface);
+    }
+
+    /* Code Blocks */
+    .code-card {
+      margin: 10px 0;
+      border-radius: 9px;
+      border: 1px solid var(--code-border);
+      background: var(--code-bg);
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .code-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 10px;
+      background: var(--code-header-bg);
+      border-bottom: 1px solid var(--code-border);
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: #94a3b8;
+    }
+
+    .code-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      color: #cbd5e1;
+      font-size: 0.7rem;
+      font-family: var(--font-body);
+      padding: 2px 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .code-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .code-copy-btn.copied {
+      background: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    pre {
+      margin: 0;
+      padding: 10px 12px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--code-text);
+      background: var(--code-bg);
+    }
+
+    pre code {
+      font-family: inherit;
+      color: inherit;
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    /* Syntax Tokens */
+    .tok-keyword {
+      color: var(--tok-keyword);
+      font-weight: 600;
+    }
+
+    .tok-string {
+      color: var(--tok-string);
+    }
+
+    .tok-comment {
+      color: var(--tok-comment);
+      font-style: italic;
+    }
+
+    .tok-number {
+      color: var(--tok-number);
+    }
+
+    /* Search Highlight */
+    mark.highlight {
+      background-color: var(--mark-bg);
+      color: var(--mark-text);
+      border-radius: 3px;
+      padding: 0 2px;
+      font-weight: 700;
+    }
+
+    /* Empty state card */
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-state-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .empty-state-desc {
+      font-size: 0.83rem;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Modals */
+    .modal-content-custom {
+      background: var(--bg-surface);
+      color: var(--text-body);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-header-custom {
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 18px;
+    }
+
+    .modal-footer-custom {
+      border-top: 1px solid var(--border-subtle);
+      padding: 12px 18px;
+    }
+
+    .flashcard {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 22px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flashcard-q {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .flashcard-answer-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Keyboard shortcuts helper */
+    kbd {
+      background-color: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-strong);
+      border-bottom-width: 2px;
+      padding: 2px 5px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      border-radius: 4px;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: var(--bg-surface);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      z-index: 9999;
+    }
+
+    .toast-pill.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Floating Back to Top Button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 900;
+    }
+
+    .back-to-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .back-to-top-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Media Queries for Mobile Responsiveness */
+    @media (max-width: 640px) {
+      .app-container {
+        padding: 8px 8px 30px;
+        margin: 8px auto;
+      }
+
+      .main-card {
+        padding: 12px 10px;
+        border-radius: 10px;
+      }
+
+      .brand-title {
+        font-size: 1.02rem;
+      }
+
+      .header-bar {
+        margin-bottom: 10px;
+      }
+
+      .q-toggle-btn {
+        font-size: 0.84rem;
+        padding: 8px 8px;
+      }
+
+      .q-body {
+        padding: 10px 10px;
+        font-size: 0.84rem;
+      }
+
+      .action-btn span.btn-label {
+        display: none;
+      }
+
+      .action-btn {
+        padding: 6px 8px;
+      }
+    }
+
+    /* Print Stylesheet */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      .app-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .main-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+
+      .header-actions,
+      .readiness-strip,
+      .search-card,
+      .tabs-wrapper,
+      .q-actions,
+      .toast-pill,
+      .back-to-top-btn {
+        display: none !important;
+      }
+
+      .q-body {
+        display: block !important;
+        border-top: 1px solid #ddd !important;
+      }
+
+      .q-card {
+        break-inside: avoid;
+        margin-bottom: 12px;
+        border: 1px solid #ccc !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container" id="appContainer">
+    <div class="main-card">
+
+      <!-- Header Top Bar -->
+      <header class="header-bar">
+        <div class="header-brand">
+          <div class="brand-icon-wrap" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="brand-title">Interview Prep Hub</h1>
+            <p class="brand-subtitle" id="globalStatsSubtitle">500+ Questions across 9 Domains</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Timed Mock Interview Trigger -->
+          <button type="button" class="action-btn action-btn-success" id="openQuizBtn" title="Start Timed Mock Interview (Alt+Q)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span class="btn-label">Mock Interview</span>
+          </button>
+
+          <!-- Practice Mode Modal Trigger -->
+          <button type="button" class="action-btn action-btn-primary" id="openPracticeBtn" title="Flashcard Mode (Alt+P)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polygon points="10 8 16 12 10 16 10 8" />
+            </svg>
+            <span class="btn-label">Flashcards</span>
+          </button>
+
+          <!-- Readiness Stats Dashboard -->
+          <button type="button" class="action-btn" id="openStatsBtn" title="Preparation Dashboard (Alt+S)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+            <span class="btn-label">Stats</span>
+          </button>
+
+          <!-- Data / Backup / Export Modal -->
+          <button type="button" class="action-btn" id="openDataBtn" title="Backup, Export & Notes">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span class="btn-label">Export</span>
+          </button>
+
+          <!-- Wide / Compact View Toggle -->
+          <button type="button" class="action-btn" id="toggleLayoutBtn" title="Toggle Compact / Wide View (Alt+W)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M15 3v18" />
+            </svg>
+            <span class="btn-label" id="layoutBtnText">Compact</span>
+          </button>
+
+          <!-- Theme Toggle (Light / Dark) -->
+          <button type="button" class="action-btn" id="toggleThemeBtn" title="Toggle Dark/Light Mode (Alt+T)" aria-label="Toggle Color Theme">
+            <svg id="themeIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            </svg>
+          </button>
+
+          <!-- Keyboard Shortcuts Help -->
+          <button type="button" class="action-btn" id="openShortcutsBtn" title="Keyboard Shortcuts (?)" aria-label="Keyboard Shortcuts">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Overall Readiness Strip -->
+      <div class="readiness-strip" id="readinessStrip">
+        <div class="readiness-info">
+          <span class="readiness-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-success"><polyline points="20 6 9 17 4 12"/></svg>
+            Readiness: <span id="readinessPercent">0%</span>
+          </span>
+          <span class="readiness-stat"><b id="readinessMastered">0</b> / <span id="readinessTotal">500</span> Mastered</span>
+          <span class="readiness-stat">★ <b id="readinessStarred">0</b> Starred</span>
+          <span class="readiness-stat">📝 <b id="readinessNotes">0</b> Notes</span>
+        </div>
+        <div class="readiness-bar-wrap" title="Preparation Progress">
+          <div class="readiness-bar-fill" id="readinessBarFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <section class="search-card" aria-label="Search and filters">
+        <div class="search-input-group">
+          <span class="search-icon-prefix" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </span>
+          <input id="searchInput" type="search" class="search-input" placeholder="Search 500+ questions, answers, code, or personal notes... (Press '/' to focus)" aria-label="Search questions" autocomplete="off" />
+          <button type="button" id="clearSearchBtn" class="search-clear-btn" title="Clear search (Esc)" aria-label="Clear search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="filter-row">
+          <!-- Scope pills -->
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <div class="pill-group" role="group" aria-label="Search Scope">
+              <button type="button" class="pill-btn active" id="scopeAllTopics" title="Search across all categories">All Topics</button>
+              <button type="button" class="pill-btn" id="scopeCurrentTab" title="Search inside active tab only">Current Tab</button>
+            </div>
+
+            <!-- Filter Status -->
+            <div class="pill-group" role="group" aria-label="Question filter">
+              <button type="button" class="pill-btn active" id="filterAll">All</button>
+              <button type="button" class="pill-btn" id="filterStarred">★ Starred</button>
+              <button type="button" class="pill-btn" id="filterMastered">✓ Mastered</button>
+              <button type="button" class="pill-btn" id="filterUnmastered">○ Needs Review</button>
+              <button type="button" class="pill-btn" id="filterNotes">📝 Notes</button>
+            </div>
+          </div>
+
+          <!-- Sort & Quick Tools -->
+          <div class="quick-tools">
+            <select id="sortSelect" class="sort-select" title="Sort Questions">
+              <option value="default">Sort: Curated</option>
+              <option value="az">Sort: A to Z</option>
+              <option value="mastered">Sort: Mastered First</option>
+              <option value="unmastered">Sort: Unmastered First</option>
+              <option value="starred">Sort: Starred First</option>
+            </select>
+
+            <button type="button" class="tool-btn" id="randomQuestionBtn" title="Jump to Random Question (Alt+R)">
+              🔀 Random
+            </button>
+            <button type="button" class="tool-btn" id="expandAllBtn" title="Expand All (Alt+E)">
+              ▾ Expand All
+            </button>
+            <button type="button" class="tool-btn" id="collapseAllBtn" title="Collapse All (Alt+C)">
+              ▴ Collapse All
+            </button>
+          </div>
+        </div>
+
+        <!-- Search Status Banner -->
+        <div id="searchStatusBanner" class="search-status-banner">
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span id="searchStatusText">Showing matching questions</span>
+            <div class="search-match-pills" id="searchMatchPills"></div>
+          </div>
+          <button type="button" id="resetSearchBannerBtn" class="tool-btn" style="background:transparent; border-color: currentColor; color: inherit;">Reset</button>
+        </div>
+      </section>
+
+      <!-- Category Navigation Tabs -->
+      <nav class="tabs-wrapper" aria-label="Interview Categories">
+        <div class="nav-tabs-custom" id="categoryTabs" role="tablist">
+          <!-- Dynamic Tabs Injected Here -->
+        </div>
+      </nav>
+
+      <!-- Category Summary Banner -->
+      <div id="categoryHeaderBanner" class="category-header-banner">
+        <div class="d-flex align-items-center gap-2">
+          <span class="category-title-text" id="categoryHeaderTitle">Node.js Core</span>
+          <span class="badge bg-secondary-subtle text-secondary-emphasis" id="categoryHeaderCount">85 questions</span>
+        </div>
+        <div class="category-progress-text" id="categoryHeaderProgress">
+          0 of 85 Mastered (0%)
+        </div>
+      </div>
+
+      <!-- Main Question Accordion Content -->
+      <main id="tabContentArea">
+        <!-- Rendered Active Tab Content -->
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Floating Back to Top Button -->
+  <button type="button" id="backToTopBtn" class="back-to-top-btn" title="Back to top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Timed Mock Interview Modal -->
+  <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <span class="fs-5">⏱️</span>
+            <h2 class="modal-title fs-6 fw-bold m-0" id="quizModalTitle">Timed Mock Interview</h2>
+            <span id="quizTimerBadge" class="badge rounded-pill bg-success-subtle text-success border border-success-subtle ms-auto font-monospace fs-6">
+              00:00
+            </span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-3 p-md-4" id="quizModalBody">
+          <!-- Setup Screen -->
+          <div id="quizSetupView">
+            <div class="text-center py-3">
+              <div class="display-6 mb-2">🎯</div>
+              <h3 class="fw-bold mb-2">Test Your Interview Readiness</h3>
+              <p class="text-muted small mb-4" style="max-width: 440px; margin: 0 auto;">Simulate a real technical phone screen or coding interview. Test yourself against random questions with a live timer and scoring.</p>
+              
+              <div class="card p-3 mx-auto mb-4" style="max-width: 420px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="mb-3 text-start">
+                  <label class="form-label small fw-bold" for="quizTopicSelect">Target Topic</label>
+                  <select id="quizTopicSelect" class="form-select form-select-sm">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+                <div class="text-start">
+                  <label class="form-label small fw-bold" for="quizLengthSelect">Number of Questions</label>
+                  <select id="quizLengthSelect" class="form-select form-select-sm">
+                    <option value="5">5 Questions (Rapid Screen • ~5 mins)</option>
+                    <option value="10" selected>10 Questions (Standard Interview • ~10 mins)</option>
+                    <option value="20">20 Questions (Deep Dive • ~25 mins)</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="button" id="startQuizBtn" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                Start Mock Interview
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Question Screen -->
+          <div id="quizActiveView" class="d-none">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span id="quizCategoryBadge" class="badge bg-primary-subtle text-primary fw-bold">NODE.JS</span>
+              <span id="quizProgressBadge" class="text-muted small fw-bold">Question 1 of 10</span>
+            </div>
+            <div class="progress mb-3" style="height: 4px; background: var(--bg-surface-elevated);">
+              <div id="quizProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 10%"></div>
+            </div>
+
+            <div class="flashcard">
+              <h3 id="quizQuestionText" class="flashcard-q">Question text goes here...</h3>
+
+              <!-- Prompt to reveal -->
+              <div id="quizPromptArea" class="text-center py-4">
+                <button type="button" id="quizRevealBtn" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                  👀 Reveal Answer &nbsp;<kbd style="background: rgba(255,255,255,0.25); border:none; color:#fff;">Space</kbd>
+                </button>
+              </div>
+
+              <!-- Answer Box -->
+              <div id="quizAnswerBox" class="flashcard-answer-box d-none">
+                <div class="d-flex justify-content-between align-items-center pb-2 mb-2 border-bottom">
+                  <span class="fw-bold text-success d-flex align-items-center gap-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                    Expected Answer
+                  </span>
+                </div>
+                <div id="quizAnswerBody"></div>
+
+                <div class="mt-4 pt-3 border-top text-center">
+                  <div class="small fw-bold text-muted mb-2">How well did you know this answer?</div>
+                  <div class="d-flex justify-content-center gap-2 flex-wrap">
+                    <button type="button" class="btn btn-outline-danger btn-sm px-3" id="quizScoreMissed">
+                      🔴 Need Practice (0 pts)
+                    </button>
+                    <button type="button" class="btn btn-outline-warning btn-sm px-3" id="quizScorePartial">
+                      🟡 Partially Knew (0.5 pts)
+                    </button>
+                    <button type="button" class="btn btn-outline-success btn-sm px-3" id="quizScoreMastered">
+                      🟢 Mastered (+1 pt)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Screen -->
+          <div id="quizSummaryView" class="d-none text-center py-4">
+            <div class="display-5 mb-2">🏆</div>
+            <h3 class="fw-bold mb-1">Interview Completed!</h3>
+            <p class="text-muted small mb-3">Here is your performance summary:</p>
+            
+            <div class="d-flex justify-content-center gap-3 mb-4">
+              <div class="card p-3" style="min-width: 130px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="fs-4 fw-bold text-success" id="quizFinalScore">8 / 10</div>
+                <div class="text-muted small">Score</div>
+              </div>
+              <div class="card p-3" style="min-width: 130px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="fs-4 fw-bold text-primary" id="quizFinalPercent">80%</div>
+                <div class="text-muted small">Accuracy</div>
+              </div>
+              <div class="card p-3" style="min-width: 130px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="fs-4 fw-bold" id="quizFinalTime">05:22</div>
+                <div class="text-muted small">Duration</div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" id="restartQuizBtn" class="btn btn-primary px-3">Start Another Quiz</button>
+              <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Practice / Flashcard Modal -->
+  <div class="modal fade" id="practiceModal" tabindex="-1" aria-labelledby="practiceModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <div class="d-flex align-items-center gap-2 flex-grow-1 flex-wrap">
+            <span class="fs-5">🎯</span>
+            <h2 class="modal-title fs-6 fw-bold m-0" id="practiceModalTitle">Practice Mode</h2>
+            <select id="practiceCategorySelect" class="form-select form-select-sm ms-2" style="width: auto; max-width: 200px; font-weight: 600;">
+              <!-- Options populated dynamically -->
+            </select>
+            <span id="practiceCounterBadge" class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle ms-auto">
+              1 / 1
+            </span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-3 p-md-4">
+          <div class="progress mb-3" style="height: 4px; background: var(--bg-surface-elevated);">
+            <div id="practiceProgressBar" class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+          </div>
+
+          <div class="flashcard">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span id="practiceCardCategory" class="badge bg-primary-subtle text-primary fw-bold">CATEGORY</span>
+                <div class="d-flex gap-1">
+                  <button type="button" id="practiceCardMasterBtn" class="action-btn" title="Toggle Mastered">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span id="practiceMasterText">Mastered</span>
+                  </button>
+                  <button type="button" id="practiceCardStarBtn" class="action-btn" title="Star for review (S)">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                    <span id="practiceStarText">Star</span>
+                  </button>
+                </div>
+              </div>
+              <h3 id="practiceQuestionText" class="flashcard-q">Loading question...</h3>
+            </div>
+
+            <!-- Reveal answer box -->
+            <div id="practiceRevealArea" class="text-center py-4">
+              <button type="button" id="practiceRevealBtn" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                👀 Reveal Answer &nbsp;<kbd style="background: rgba(255,255,255,0.25); border:none; color:#fff;">Space</kbd>
+              </button>
+            </div>
+
+            <div id="practiceAnswerBox" class="flashcard-answer-box d-none">
+              <div class="d-flex justify-content-between align-items-center pb-2 mb-2 border-bottom">
+                <span class="fw-bold text-success d-flex align-items-center gap-1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                  Answer
+                </span>
+                <button type="button" id="practiceCopyAnswerBtn" class="tool-btn">Copy</button>
+              </div>
+              <div id="practiceAnswerBody"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer modal-footer-custom d-flex justify-content-between align-items-center">
+          <div class="text-muted small d-none d-md-block">
+            <kbd>←</kbd> Prev &nbsp;|&nbsp; <kbd>→</kbd> Next &nbsp;|&nbsp; <kbd>Space</kbd> Reveal &nbsp;|&nbsp; <kbd>S</kbd> Star
+          </div>
+          <div class="d-flex gap-2 ms-auto">
+            <button type="button" id="practicePrevBtn" class="action-btn">← Prev</button>
+            <button type="button" id="practiceShuffleBtn" class="action-btn">🔀 Shuffle</button>
+            <button type="button" id="practiceNextBtn" class="action-btn action-btn-primary">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Dashboard Modal -->
+  <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="statsModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-5">📊</span>
+            <h2 class="modal-title fs-6 fw-bold m-0" id="statsModalTitle">Interview Readiness Dashboard</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3 p-md-4">
+          <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+              <div class="card p-3 text-center" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="display-6 fw-bold text-primary" id="dashTotalCount">518</div>
+                <div class="small text-muted fw-semibold">Total Questions</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card p-3 text-center" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="display-6 fw-bold text-success" id="dashMasteredCount">0</div>
+                <div class="small text-muted fw-semibold">Mastered (✓)</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card p-3 text-center" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="display-6 fw-bold text-warning" id="dashStarredCount">0</div>
+                <div class="small text-muted fw-semibold">Starred (★)</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card p-3 text-center" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 10px;">
+                <div class="display-6 fw-bold" style="color: #8b5cf6;" id="dashNotesCount">0</div>
+                <div class="small text-muted fw-semibold">With Notes (📝)</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="fs-6 fw-bold mb-3">Category Mastery Breakdown</h3>
+          <div class="d-flex flex-column gap-3" id="dashCategoryBreakdown">
+            <!-- Dynamic Category Rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Management Modal (Export / Import / Cheatsheet) -->
+  <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-5">💾</span>
+            <h2 class="modal-title fs-6 fw-bold m-0" id="dataModalTitle">Data, Export & Backup</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3 p-md-4">
+          <div class="d-flex flex-column gap-3">
+            <div class="p-3 border rounded-3" style="background: var(--bg-surface-elevated); border-color: var(--border-subtle);">
+              <h4 class="fs-6 fw-bold mb-1">📄 Export Markdown Cheatsheet</h4>
+              <p class="small text-muted mb-2">Download a clean, formatted Markdown file containing your Starred questions, Mastered answers, and personal notes for offline study or Notion.</p>
+              <button type="button" id="exportMarkdownBtn" class="btn btn-outline-primary btn-sm">
+                Download Cheatsheet (.md)
+              </button>
+            </div>
+
+            <div class="p-3 border rounded-3" style="background: var(--bg-surface-elevated); border-color: var(--border-subtle);">
+              <h4 class="fs-6 fw-bold mb-1">💾 Full Backup (JSON)</h4>
+              <p class="small text-muted mb-2">Save all your preparation data (mastered status, bookmarks, and notes) to restore on another device.</p>
+              <div class="d-flex gap-2">
+                <button type="button" id="exportBackupJsonBtn" class="btn btn-outline-secondary btn-sm">
+                  Export Backup (.json)
+                </button>
+                <button type="button" id="triggerImportBtn" class="btn btn-outline-secondary btn-sm">
+                  Import Backup (.json)
+                </button>
+                <input type="file" id="importFileInput" accept=".json" class="d-none" />
+              </div>
+            </div>
+
+            <div class="p-3 border rounded-3 border-danger-subtle bg-danger-subtle">
+              <h4 class="fs-6 fw-bold text-danger mb-1">⚠️ Reset Progress</h4>
+              <p class="small text-muted mb-2">Clear all saved progress, bookmarks, and notes stored in this browser.</p>
+              <button type="button" id="resetAllDataBtn" class="btn btn-danger btn-sm">
+                Reset All Progress
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="modal fade" id="shortcutsModal" tabindex="-1" aria-labelledby="shortcutsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <h2 class="modal-title fs-6 fw-bold m-0" id="shortcutsModalLabel">Keyboard Shortcuts</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+          <table class="table table-borderless m-0" style="color: inherit; font-size: 0.88rem;">
+            <tbody>
+              <tr><td><kbd>/</kbd> or <kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd></td><td>Focus search bar</td></tr>
+              <tr><td><kbd>Esc</kbd></td><td>Clear search / close modals</td></tr>
+              <tr><td><kbd>Alt + E</kbd></td><td>Expand all questions in tab</td></tr>
+              <tr><td><kbd>Alt + C</kbd></td><td>Collapse all questions in tab</td></tr>
+              <tr><td><kbd>Alt + P</kbd></td><td>Launch Flashcards</td></tr>
+              <tr><td><kbd>Alt + Q</kbd></td><td>Start Timed Mock Interview</td></tr>
+              <tr><td><kbd>Alt + S</kbd></td><td>Open Stats Dashboard</td></tr>
+              <tr><td><kbd>Alt + R</kbd></td><td>Jump to random question</td></tr>
+              <tr><td><kbd>Alt + W</kbd></td><td>Toggle Wide / Compact Layout</td></tr>
+              <tr><td><kbd>Alt + T</kbd></td><td>Toggle Light / Dark Theme</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Floating Pill -->
+  <div id="toastPill" class="toast-pill" role="status" aria-live="polite">Notification</div>
+
+  <!-- Data Question Scripts -->
+  <script src="questions_python.js"></script>
+  <script src="questions_int1.js"></script>
+  <script src="questions_nodejs.js"></script>
+  <script src="questions_php.js"></script>
+  <script src="questions_vuejs.js"></script>
+  <script src="questions_hr.js"></script>
+  <script src="questions_interview.js"></script>
+  <script src="questions_nodejs1.js"></script>
+  <script src="questions_laravel.js"></script>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Application Logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      // --- 1. Topic Definitions & Data Binding ---
+      const topics = [
+        { id: "node", name: "Node", fullTitle: "Node.js Core", data: window.questions_nodejs || [] },
+        { id: "node1", name: "Node (Adv)", fullTitle: "Node.js Advanced", data: window.questions_nodejs1 || [] },
+        { id: "php", name: "PHP", fullTitle: "PHP Fundamentals", data: window.questions_php || [] },
+        { id: "laravel", name: "Laravel", fullTitle: "Laravel Framework", data: window.questions_laravel || [] },
+        { id: "vue", name: "Vue.js", fullTitle: "Vue.js Framework", data: window.questions_vuejs || [] },
+        { id: "python", name: "Python", fullTitle: "Python Core", data: window.questions_python || [] },
+        { id: "int1", name: "Tech Core", fullTitle: "Technical & CS Concepts", data: window.questions_int1 || [] },
+        { id: "hr", name: "HR", fullTitle: "HR & Behavioral", data: window.questions_hr || [] },
+        { id: "resume", name: "Projects", fullTitle: "Resume & Projects", data: window.questions_interview || [] },
+      ];
+
+      const totalQuestionCount = topics.reduce((acc, t) => acc + (t.data ? t.data.length : 0), 0);
+      document.getElementById('globalStatsSubtitle').textContent = `${totalQuestionCount} Questions across ${topics.length} Categories`;
+      document.getElementById('readinessTotal').textContent = totalQuestionCount;
+
+      // --- 2. State & Persistence ---
+      const STARRED_KEY = 'interview_hub_starred_v2';
+      const MASTERED_KEY = 'interview_hub_mastered_v2';
+      const NOTES_KEY = 'interview_hub_notes_v2';
+
+      let starredStore = safeJsonParse(localStorage.getItem(STARRED_KEY), {});
+      let masteredStore = safeJsonParse(localStorage.getItem(MASTERED_KEY), {});
+      let notesStore = safeJsonParse(localStorage.getItem(NOTES_KEY), {});
+
+      let activeTabId = localStorage.getItem('interview_active_tab') || 'node';
+      let searchScope = 'all'; // 'all' or 'current'
+      let filterMode = 'all'; // 'all' | 'starred' | 'mastered' | 'unmastered' | 'notes'
+      let sortMode = 'default'; // 'default' | 'az' | 'mastered' | 'unmastered' | 'starred'
+      let currentSearchQuery = '';
+
+      function safeJsonParse(str, fallback) {
+        try {
+          return str ? JSON.parse(str) : fallback;
+        } catch (e) {
+          return fallback;
+        }
+      }
+
+      // --- DOM Elements ---
+      const appContainer = document.getElementById('appContainer');
+      const categoryTabs = document.getElementById('categoryTabs');
+      const tabContentArea = document.getElementById('tabContentArea');
+      const categoryHeaderTitle = document.getElementById('categoryHeaderTitle');
+      const categoryHeaderCount = document.getElementById('categoryHeaderCount');
+      const categoryHeaderProgress = document.getElementById('categoryHeaderProgress');
+      const searchInput = document.getElementById('searchInput');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      const searchStatusBanner = document.getElementById('searchStatusBanner');
+      const searchStatusText = document.getElementById('searchStatusText');
+      const searchMatchPills = document.getElementById('searchMatchPills');
+      const resetSearchBannerBtn = document.getElementById('resetSearchBannerBtn');
+      const scopeAllTopicsBtn = document.getElementById('scopeAllTopics');
+      const scopeCurrentTabBtn = document.getElementById('scopeCurrentTab');
+      const filterAllBtn = document.getElementById('filterAll');
+      const filterStarredBtn = document.getElementById('filterStarred');
+      const filterMasteredBtn = document.getElementById('filterMastered');
+      const filterUnmasteredBtn = document.getElementById('filterUnmastered');
+      const filterNotesBtn = document.getElementById('filterNotes');
+      const sortSelect = document.getElementById('sortSelect');
+      const expandAllBtn = document.getElementById('expandAllBtn');
+      const collapseAllBtn = document.getElementById('collapseAllBtn');
+      const randomQuestionBtn = document.getElementById('randomQuestionBtn');
+      const toggleLayoutBtn = document.getElementById('toggleLayoutBtn');
+      const layoutBtnText = document.getElementById('layoutBtnText');
+      const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+      const openPracticeBtn = document.getElementById('openPracticeBtn');
+      const openQuizBtn = document.getElementById('openQuizBtn');
+      const openStatsBtn = document.getElementById('openStatsBtn');
+      const openDataBtn = document.getElementById('openDataBtn');
+      const openShortcutsBtn = document.getElementById('openShortcutsBtn');
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      const toastPill = document.getElementById('toastPill');
+
+      // Modals
+      const practiceModal = new bootstrap.Modal(document.getElementById('practiceModal'));
+      const quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
+      const statsModal = new bootstrap.Modal(document.getElementById('statsModal'));
+      const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
+      const shortcutsModal = new bootstrap.Modal(document.getElementById('shortcutsModal'));
+
+      // --- Toast Notification Helper ---
+      let toastTimer = null;
+      function showToast(message) {
+        toastPill.textContent = message;
+        toastPill.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastPill.classList.remove('show');
+        }, 1900);
+      }
+
+      // --- Unique Key Generator ---
+      function makeQAKey(topicId, question) {
+        return `${topicId}::${question.trim().toLowerCase()}`;
+      }
+
+      // --- HTML Sanitization & Fix for Raw Unescaped Component Tags ---
+      function sanitizeAnswerHtml(html) {
+        if (!html) return '';
+        const allowed = /^(pre|code|b|br|ul|li|small|a|span|mark|i|strong|em)$/i;
+        return html.replace(/<\/?([a-zA-Z0-9_\-:]+)([^>]*)>/g, (fullMatch, tagName, attrs) => {
+          if (allowed.test(tagName)) return fullMatch;
+          const isClosing = fullMatch.startsWith('</');
+          const escaped = isClosing ? `&lt;/${tagName}&gt;` : `&lt;${tagName}${attrs}&gt;`;
+          return `<code>${escaped}</code>`;
+        });
+      }
+
+      // --- Syntax Token Highlighter for Code Blocks ---
+      function highlightCodeSyntax(rawCode) {
+        const tokenRegex = /(\/\/.*$|#.*$|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|(\b(?:const|let|var|function|return|if|else|for|while|import|export|from|class|extends|new|this|async|await|try|catch|finally|throw|def|elif|lambda|yield|public|protected|private|static|namespace|use|interface|implements|true|false|null|None|True|False)\b)|(\b\d+(?:\.\d+)?\b)/gm;
+
+        let result = '';
+        let lastIndex = 0;
+        let match;
+
+        while ((match = tokenRegex.exec(rawCode)) !== null) {
+          if (match.index > lastIndex) {
+            result += escapeHtml(rawCode.slice(lastIndex, match.index));
+          }
+          const [full, comment, string, keyword, number] = match;
+          if (comment) {
+            result += `<span class="tok-comment">${escapeHtml(comment)}</span>`;
+          } else if (string) {
+            result += `<span class="tok-string">${escapeHtml(string)}</span>`;
+          } else if (keyword) {
+            result += `<span class="tok-keyword">${escapeHtml(keyword)}</span>`;
+          } else if (number) {
+            result += `<span class="tok-number">${escapeHtml(number)}</span>`;
+          }
+          lastIndex = tokenRegex.lastIndex;
+        }
+        if (lastIndex < rawCode.length) {
+          result += escapeHtml(rawCode.slice(lastIndex));
+        }
+        return result;
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // --- HTML-Safe Keyword Highlighting ---
+      function highlightHtmlSafe(html, term) {
+        if (!term || !term.trim()) return html;
+        const container = document.createElement('div');
+        container.innerHTML = html;
+        const cleanTerm = term.trim();
+        const regex = new RegExp(cleanTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        for (const node of textNodes) {
+          const parent = node.parentNode;
+          if (!parent || parent.nodeName === 'MARK' || parent.nodeName === 'SCRIPT' || parent.nodeName === 'STYLE') continue;
+          const text = node.nodeValue;
+          if (!text || !regex.test(text)) continue;
+          regex.lastIndex = 0;
+
+          const frag = document.createDocumentFragment();
+          let lastIndex = 0;
+          let match;
+          while ((match = regex.exec(text)) !== null) {
+            if (match.index > lastIndex) {
+              frag.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+            }
+            const mark = document.createElement('mark');
+            mark.className = 'highlight';
+            mark.textContent = match[0];
+            frag.appendChild(mark);
+            lastIndex = regex.lastIndex;
+          }
+          if (lastIndex < text.length) {
+            frag.appendChild(document.createTextNode(text.substring(lastIndex)));
+          }
+          parent.replaceChild(frag, node);
+        }
+        return container.innerHTML;
+      }
+
+      // --- Code Block Card Wrapper with Syntax Highlighting ---
+      function enhanceCodeBlocks(container) {
+        container.querySelectorAll('pre').forEach(pre => {
+          if (pre.closest('.code-card')) return;
+          const codeEl = pre.querySelector('code') || pre;
+          const rawCode = codeEl.innerText.trim();
+
+          const card = document.createElement('div');
+          card.className = 'code-card';
+
+          const header = document.createElement('div');
+          header.className = 'code-card-header';
+          header.innerHTML = `
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Snippet
+            </span>
+            <button type="button" class="code-copy-btn" title="Copy code">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <span>Copy</span>
+            </button>
+          `;
+
+          // Format syntax inside code block
+          codeEl.innerHTML = highlightCodeSyntax(rawCode);
+
+          const copyBtn = header.querySelector('.code-copy-btn');
+          copyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyTextToClipboard(rawCode, copyBtn, 'Copied!');
+          });
+
+          pre.parentNode.insertBefore(card, pre);
+          card.appendChild(header);
+          card.appendChild(pre);
+        });
+      }
+
+      // --- Clipboard Copy Helper with ExecCommand Fallback ---
+      function copyTextToClipboard(text, btnElement, successMsg = 'Copied!') {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(showSuccess, fallback);
+        } else {
+          fallback();
+        }
+
+        function showSuccess() {
+          if (!btnElement) {
+            showToast(successMsg);
+            return;
+          }
+          const origHtml = btnElement.innerHTML;
+          btnElement.classList.add('copied');
+          btnElement.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>${successMsg}</span>
+          `;
+          setTimeout(() => {
+            btnElement.innerHTML = origHtml;
+            btnElement.classList.remove('copied');
+          }, 1800);
+        }
+
+        function fallback() {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showSuccess();
+          } catch (e) {
+            showToast('Unable to copy');
+          }
+        }
+      }
+
+      function copyQuestionAndAnswer(question, answer, btn) {
+        const temp = document.createElement('div');
+        temp.innerHTML = answer.replace(/<br\s*\/?>/gi, '\n');
+        const cleanAnswer = temp.innerText.trim();
+        const formatted = `Q: ${question.trim()}\n\nA: ${cleanAnswer}`;
+        copyTextToClipboard(formatted, btn, 'Copied Q&A!');
+      }
+
+      // --- Star, Mastered & Notes Logic ---
+      function isStarred(topicId, question) {
+        return Boolean(starredStore[makeQAKey(topicId, question)]);
+      }
+
+      function isMastered(topicId, question) {
+        return Boolean(masteredStore[makeQAKey(topicId, question)]);
+      }
+
+      function getNote(topicId, question) {
+        return notesStore[makeQAKey(topicId, question)] || '';
+      }
+
+      function toggleStar(topicId, topicName, question, answer) {
+        const key = makeQAKey(topicId, question);
+        if (starredStore[key]) {
+          delete starredStore[key];
+          showToast('Removed from Starred');
+        } else {
+          starredStore[key] = { topicId, topicName, question, answer, starredAt: Date.now() };
+          showToast('★ Added to Starred');
+        }
+        localStorage.setItem(STARRED_KEY, JSON.stringify(starredStore));
+        updateAllStats();
+        if (activeTabId === 'starred') renderTabContent();
+      }
+
+      function toggleMastered(topicId, question) {
+        const key = makeQAKey(topicId, question);
+        if (masteredStore[key]) {
+          delete masteredStore[key];
+          showToast('Marked as Needs Review');
+        } else {
+          masteredStore[key] = { topicId, question, masteredAt: Date.now() };
+          showToast('✓ Marked as Mastered!');
+        }
+        localStorage.setItem(MASTERED_KEY, JSON.stringify(masteredStore));
+        updateAllStats();
+        renderTabContent();
+      }
+
+      function saveNote(topicId, question, text) {
+        const key = makeQAKey(topicId, question);
+        if (!text || !text.trim()) {
+          delete notesStore[key];
+        } else {
+          notesStore[key] = text.trim();
+        }
+        localStorage.setItem(NOTES_KEY, JSON.stringify(notesStore));
+        updateAllStats();
+      }
+
+      function getStarredList() {
+        return Object.values(starredStore).sort((a, b) => (b.starredAt || 0) - (a.starredAt || 0));
+      }
+
+      // --- Global Readiness Stats Updater ---
+      function updateAllStats() {
+        const totalMastered = Object.keys(masteredStore).length;
+        const totalStarred = Object.keys(starredStore).length;
+        const totalNotes = Object.keys(notesStore).filter(k => notesStore[k] && notesStore[k].trim()).length;
+        const percent = totalQuestionCount > 0 ? Math.round((totalMastered / totalQuestionCount) * 100) : 0;
+
+        document.getElementById('readinessPercent').textContent = `${percent}%`;
+        document.getElementById('readinessMastered').textContent = totalMastered;
+        document.getElementById('readinessStarred').textContent = totalStarred;
+        document.getElementById('readinessNotes').textContent = totalNotes;
+        document.getElementById('readinessBarFill').style.width = `${percent}%`;
+
+        // Update starred badge on tab
+        const starredBadge = document.getElementById('badge-starred');
+        if (starredBadge) starredBadge.textContent = totalStarred;
+
+        // Update active tab progress banner
+        updateCategoryHeaderBanner();
+      }
+
+      function updateCategoryHeaderBanner() {
+        if (activeTabId === 'starred') {
+          categoryHeaderTitle.textContent = '★ Starred Questions Hub';
+          const count = Object.keys(starredStore).length;
+          categoryHeaderCount.textContent = `${count} questions`;
+          categoryHeaderProgress.textContent = `${count} bookmarked for revision`;
+          return;
+        }
+
+        const currTopic = topics.find(t => t.id === activeTabId);
+        if (!currTopic) return;
+
+        const topicTotal = currTopic.data ? currTopic.data.length : 0;
+        const topicMastered = (currTopic.data || []).filter(q => isMastered(currTopic.id, q.question)).length;
+        const topicPercent = topicTotal > 0 ? Math.round((topicMastered / topicTotal) * 100) : 0;
+
+        categoryHeaderTitle.textContent = currTopic.fullTitle || currTopic.name;
+        categoryHeaderCount.textContent = `${topicTotal} questions`;
+        categoryHeaderProgress.textContent = `${topicMastered} of ${topicTotal} Mastered (${topicPercent}%)`;
+      }
+
+      // --- Tab Bar Generation ---
+      function renderCategoryTabs() {
+        categoryTabs.innerHTML = '';
+
+        // 1. Starred Tab
+        const starredCount = Object.keys(starredStore).length;
+        const starredTabBtn = document.createElement('button');
+        starredTabBtn.type = 'button';
+        starredTabBtn.className = `tab-item-btn${activeTabId === 'starred' ? ' active' : ''}`;
+        starredTabBtn.id = 'tab-btn-starred';
+        starredTabBtn.innerHTML = `
+          <span>★ Starred</span>
+          <span class="badge-count" id="badge-starred">${starredCount}</span>
+        `;
+        starredTabBtn.addEventListener('click', () => switchTab('starred'));
+        categoryTabs.appendChild(starredTabBtn);
+
+        // 2. Domain Topics
+        topics.forEach(t => {
+          const tabBtn = document.createElement('button');
+          tabBtn.type = 'button';
+          tabBtn.className = `tab-item-btn${activeTabId === t.id ? ' active' : ''}`;
+          tabBtn.id = `tab-btn-${t.id}`;
+          const count = t.data ? t.data.length : 0;
+          tabBtn.innerHTML = `
+            <span>${t.name}</span>
+            <span class="badge-count" id="badge-${t.id}">${count}</span>
+          `;
+          tabBtn.addEventListener('click', () => switchTab(t.id));
+          categoryTabs.appendChild(tabBtn);
+        });
+      }
+
+      function switchTab(tabId) {
+        activeTabId = tabId;
+        try {
+          localStorage.setItem('interview_active_tab', tabId);
+        } catch (e) { }
+
+        document.querySelectorAll('.tab-item-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.id === `tab-btn-${tabId}`);
+        });
+
+        updateCategoryHeaderBanner();
+
+        if (currentSearchQuery && searchScope === 'current') {
+          updateSearch();
+        } else {
+          renderTabContent();
+        }
+      }
+
+      // --- Filtered & Sorted Tab Data ---
+      function getActiveTabData() {
+        let rawList = [];
+        let currentTopic = null;
+
+        if (activeTabId === 'starred') {
+          rawList = getStarredList();
+        } else {
+          currentTopic = topics.find(t => t.id === activeTabId);
+          if (currentTopic && currentTopic.data) {
+            rawList = currentTopic.data.map(q => ({
+              ...q,
+              topicId: currentTopic.id,
+              topicName: currentTopic.name
+            }));
+          }
+        }
+
+        // Apply Status Filters
+        if (filterMode === 'starred' && activeTabId !== 'starred') {
+          rawList = rawList.filter(item => isStarred(item.topicId || activeTabId, item.question));
+        } else if (filterMode === 'mastered') {
+          rawList = rawList.filter(item => isMastered(item.topicId || activeTabId, item.question));
+        } else if (filterMode === 'unmastered') {
+          rawList = rawList.filter(item => !isMastered(item.topicId || activeTabId, item.question));
+        } else if (filterMode === 'notes') {
+          rawList = rawList.filter(item => Boolean(getNote(item.topicId || activeTabId, item.question)));
+        }
+
+        // Apply Search Filter
+        if (currentSearchQuery) {
+          const term = currentSearchQuery.toLowerCase();
+          rawList = rawList.filter(item => {
+            const qMatch = item.question && item.question.toLowerCase().includes(term);
+            const aMatch = item.answer && item.answer.toLowerCase().includes(term);
+            const noteMatch = getNote(item.topicId || activeTabId, item.question).toLowerCase().includes(term);
+            return qMatch || aMatch || noteMatch;
+          });
+        }
+
+        // Apply Sorting
+        if (sortMode === 'az') {
+          rawList.sort((a, b) => a.question.localeCompare(b.question));
+        } else if (sortMode === 'mastered') {
+          rawList.sort((a, b) => (isMastered(b.topicId || activeTabId, b.question) ? 1 : 0) - (isMastered(a.topicId || activeTabId, a.question) ? 1 : 0));
+        } else if (sortMode === 'unmastered') {
+          rawList.sort((a, b) => (isMastered(a.topicId || activeTabId, a.question) ? 1 : 0) - (isMastered(b.topicId || activeTabId, b.question) ? 1 : 0));
+        } else if (sortMode === 'starred') {
+          rawList.sort((a, b) => (isStarred(b.topicId || activeTabId, b.question) ? 1 : 0) - (isStarred(a.topicId || activeTabId, a.question) ? 1 : 0));
+        }
+
+        return { list: rawList, topic: currentTopic };
+      }
+
+      // --- Render Tab Content ---
+      function renderTabContent() {
+        tabContentArea.innerHTML = '';
+        const { list, topic } = getActiveTabData();
+
+        if (list.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-state';
+          if (currentSearchQuery) {
+            empty.innerHTML = `
+              <div class="empty-state-icon">🔍</div>
+              <h3 class="empty-state-title">No matching questions</h3>
+              <p class="empty-state-desc">No questions found matching "<b>${escapeHtml(currentSearchQuery)}</b>" with current filters.</p>
+              <button type="button" class="action-btn mt-3" id="emptyClearBtn">Clear Search</button>
+            `;
+            tabContentArea.appendChild(empty);
+            const clearBtn = empty.querySelector('#emptyClearBtn');
+            if (clearBtn) clearBtn.addEventListener('click', clearSearch);
+          } else if (activeTabId === 'starred') {
+            empty.innerHTML = `
+              <div class="empty-state-icon">⭐</div>
+              <h3 class="empty-state-title">No starred questions yet</h3>
+              <p class="empty-state-desc">Click the ★ star icon on any question to bookmark it here for quick revision before your interview.</p>
+            `;
+            tabContentArea.appendChild(empty);
+          } else {
+            empty.innerHTML = `
+              <div class="empty-state-icon">📋</div>
+              <h3 class="empty-state-title">No questions found</h3>
+              <p class="empty-state-desc">No questions match the current filter selection (${filterMode}). Switch to "All" to view all questions.</p>
+            `;
+            tabContentArea.appendChild(empty);
+          }
+          return;
+        }
+
+        const questionList = document.createElement('div');
+        questionList.className = 'question-list';
+
+        list.forEach((qa, idx) => {
+          const topicId = qa.topicId || activeTabId;
+          const topicName = qa.topicName || (topic ? topic.name : '');
+          const qaKey = makeQAKey(topicId, qa.question);
+          const starred = isStarred(topicId, qa.question);
+          const mastered = isMastered(topicId, qa.question);
+          const existingNote = getNote(topicId, qa.question);
+
+          const isSearchMatch = Boolean(currentSearchQuery);
+
+          const card = document.createElement('article');
+          card.className = `q-card${starred ? ' is-starred' : ''}${mastered ? ' is-mastered' : ''}${isSearchMatch ? ' is-open' : ''}`;
+          card.id = `qcard-${topicId}-${idx}`;
+          card.setAttribute('data-qa-key', qaKey);
+
+          const sanitizedAnswer = sanitizeAnswerHtml(qa.answer);
+          const qTextHtml = currentSearchQuery ? highlightHtmlSafe(escapeHtml(qa.question), currentSearchQuery) : escapeHtml(qa.question);
+          const aTextHtml = currentSearchQuery ? highlightHtmlSafe(sanitizedAnswer, currentSearchQuery) : sanitizedAnswer;
+
+          card.innerHTML = `
+            <div class="q-header">
+              <button type="button" class="q-toggle-btn" aria-expanded="${isSearchMatch}" aria-controls="body-${topicId}-${idx}">
+                <span class="q-num-badge">#${idx + 1}</span>
+                <span class="q-text">
+                  ${activeTabId === 'starred' ? `<span class="badge bg-secondary-subtle text-secondary-emphasis me-1">${escapeHtml(topicName)}</span> ` : ''}
+                  ${qTextHtml}
+                </span>
+                <span class="chevron-icon" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </button>
+              <div class="q-actions">
+                <button type="button" class="q-action-icon-btn master-btn${mastered ? ' mastered' : ''}" data-qa-key="${qaKey}" title="${mastered ? 'Mastered (Click to unmark)' : 'Mark as Mastered'}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <button type="button" class="q-action-icon-btn star-btn${starred ? ' starred' : ''}" data-qa-key="${qaKey}" title="${starred ? 'Unstar question' : 'Star for review'}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="${starred ? 'var(--star-color)' : 'none'}" stroke="${starred ? 'var(--star-color)' : 'currentColor'}" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </button>
+                <button type="button" class="q-action-icon-btn note-btn${existingNote ? ' has-note' : ''}" title="Add / View Personal Note">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </button>
+                <button type="button" class="q-action-icon-btn copy-qa-btn" title="Copy Question & Answer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="q-body" id="body-${topicId}-${idx}">
+              <div class="q-answer-content">${aTextHtml}</div>
+              
+              <!-- Personal Notes Box -->
+              <div class="q-notes-drawer ${existingNote ? '' : 'd-none'}" id="notes-drawer-${topicId}-${idx}">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="small fw-bold text-muted d-flex align-items-center gap-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    My Notes & Talking Points
+                  </span>
+                  <small class="text-muted" style="font-size:0.7rem;">Auto-saved</small>
+                </div>
+                <textarea class="q-notes-textarea" id="note-input-${topicId}-${idx}" name="note-${topicId}-${idx}" aria-label="Personal notes" placeholder="Add talking points, project examples, edge cases to remember...">${escapeHtml(existingNote)}</textarea>
+              </div>
+            </div>
+          `;
+
+          // Event Listeners
+          const toggleBtn = card.querySelector('.q-toggle-btn');
+          toggleBtn.addEventListener('click', () => {
+            const isOpen = card.classList.toggle('is-open');
+            toggleBtn.setAttribute('aria-expanded', isOpen);
+          });
+
+          const masterBtn = card.querySelector('.master-btn');
+          masterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMastered(topicId, qa.question);
+          });
+
+          const starBtn = card.querySelector('.star-btn');
+          starBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleStar(topicId, topicName, qa.question, qa.answer);
+          });
+
+          const noteBtn = card.querySelector('.note-btn');
+          const notesDrawer = card.querySelector('.q-notes-drawer');
+          const notesTextarea = card.querySelector('.q-notes-textarea');
+          noteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            card.classList.add('is-open');
+            notesDrawer.classList.toggle('d-none');
+            if (!notesDrawer.classList.contains('d-none')) {
+              notesTextarea.focus();
+            }
+          });
+
+          // Debounced Note Autosave
+          let noteSaveTimer = null;
+          notesTextarea.addEventListener('input', () => {
+            clearTimeout(noteSaveTimer);
+            noteSaveTimer = setTimeout(() => {
+              saveNote(topicId, qa.question, notesTextarea.value);
+              const hasVal = Boolean(notesTextarea.value.trim());
+              noteBtn.classList.toggle('has-note', hasVal);
+            }, 300);
+          });
+
+          const copyBtn = card.querySelector('.copy-qa-btn');
+          copyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyQuestionAndAnswer(qa.question, qa.answer, copyBtn);
+          });
+
+          questionList.appendChild(card);
+        });
+
+        tabContentArea.appendChild(questionList);
+        enhanceCodeBlocks(tabContentArea);
+      }
+
+      // --- Search Engine ---
+      function updateSearch() {
+        currentSearchQuery = searchInput.value.trim();
+        clearSearchBtn.classList.toggle('visible', currentSearchQuery.length > 0);
+
+        if (!currentSearchQuery) {
+          searchStatusBanner.classList.remove('visible');
+          restoreTabCountBadges();
+          renderTabContent();
+          return;
+        }
+
+        const term = currentSearchQuery.toLowerCase();
+        let totalMatches = 0;
+        const topicMatches = {};
+
+        topics.forEach(t => {
+          const matches = (t.data || []).filter(qa =>
+            (qa.question && qa.question.toLowerCase().includes(term)) ||
+            (qa.answer && qa.answer.toLowerCase().includes(term)) ||
+            getNote(t.id, qa.question).toLowerCase().includes(term)
+          );
+          topicMatches[t.id] = matches.length;
+          totalMatches += matches.length;
+        });
+
+        const starredMatches = getStarredList().filter(qa =>
+          (qa.question && qa.question.toLowerCase().includes(term)) ||
+          (qa.answer && qa.answer.toLowerCase().includes(term)) ||
+          getNote(qa.topicId || 'starred', qa.question).toLowerCase().includes(term)
+        ).length;
+        topicMatches['starred'] = starredMatches;
+
+        if (searchScope === 'all') {
+          topics.forEach(t => {
+            const badge = document.getElementById(`badge-${t.id}`);
+            const tabBtn = document.getElementById(`tab-btn-${t.id}`);
+            const matchCount = topicMatches[t.id] || 0;
+            if (badge) badge.textContent = matchCount;
+            if (tabBtn) tabBtn.classList.toggle('has-matches', matchCount > 0);
+          });
+          const starredBadge = document.getElementById('badge-starred');
+          const starredBtn = document.getElementById('tab-btn-starred');
+          if (starredBadge) starredBadge.textContent = starredMatches;
+          if (starredBtn) starredBtn.classList.toggle('has-matches', starredMatches > 0);
+
+          searchStatusBanner.classList.add('visible');
+          searchStatusText.textContent = `Found ${totalMatches} match${totalMatches === 1 ? '' : 'es'}:`;
+
+          // Generate clickable jump pills for categories with matches
+          searchMatchPills.innerHTML = '';
+          topics.forEach(t => {
+            if (topicMatches[t.id] > 0) {
+              const pill = document.createElement('a');
+              pill.href = '#';
+              pill.className = 'match-pill-tag';
+              pill.textContent = `${t.name} (${topicMatches[t.id]})`;
+              pill.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(t.id);
+              });
+              searchMatchPills.appendChild(pill);
+            }
+          });
+        } else {
+          searchStatusBanner.classList.add('visible');
+          const currentMatches = topicMatches[activeTabId] || 0;
+          searchStatusText.textContent = `Showing ${currentMatches} match${currentMatches === 1 ? '' : 'es'} in current tab`;
+          searchMatchPills.innerHTML = '';
+        }
+
+        renderTabContent();
+      }
+
+      function restoreTabCountBadges() {
+        topics.forEach(t => {
+          const badge = document.getElementById(`badge-${t.id}`);
+          const tabBtn = document.getElementById(`tab-btn-${t.id}`);
+          if (badge) badge.textContent = t.data ? t.data.length : 0;
+          if (tabBtn) tabBtn.classList.remove('has-matches');
+        });
+        const starredBadge = document.getElementById('badge-starred');
+        const starredBtn = document.getElementById('tab-btn-starred');
+        if (starredBadge) starredBadge.textContent = Object.keys(starredStore).length;
+        if (starredBtn) starredBtn.classList.remove('has-matches');
+      }
+
+      function clearSearch() {
+        searchInput.value = '';
+        currentSearchQuery = '';
+        clearSearchBtn.classList.remove('visible');
+        searchStatusBanner.classList.remove('visible');
+        restoreTabCountBadges();
+        renderTabContent();
+      }
+
+      let searchDebounceTimer = null;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(updateSearch, 120);
+      });
+
+      clearSearchBtn.addEventListener('click', clearSearch);
+      resetSearchBannerBtn.addEventListener('click', clearSearch);
+
+      // Search Scope
+      scopeAllTopicsBtn.addEventListener('click', () => {
+        searchScope = 'all';
+        scopeAllTopicsBtn.classList.add('active');
+        scopeCurrentTabBtn.classList.remove('active');
+        updateSearch();
+      });
+
+      scopeCurrentTabBtn.addEventListener('click', () => {
+        searchScope = 'current';
+        scopeCurrentTabBtn.classList.add('active');
+        scopeAllTopicsBtn.classList.remove('active');
+        updateSearch();
+      });
+
+      // Filter Buttons
+      function setFilter(newFilter, activeBtn) {
+        filterMode = newFilter;
+        [filterAllBtn, filterStarredBtn, filterMasteredBtn, filterUnmasteredBtn, filterNotesBtn].forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+        renderTabContent();
+      }
+
+      filterAllBtn.addEventListener('click', () => setFilter('all', filterAllBtn));
+      filterStarredBtn.addEventListener('click', () => setFilter('starred', filterStarredBtn));
+      filterMasteredBtn.addEventListener('click', () => setFilter('mastered', filterMasteredBtn));
+      filterUnmasteredBtn.addEventListener('click', () => setFilter('unmastered', filterUnmasteredBtn));
+      filterNotesBtn.addEventListener('click', () => setFilter('notes', filterNotesBtn));
+
+      // Sort Select
+      sortSelect.addEventListener('change', () => {
+        sortMode = sortSelect.value;
+        renderTabContent();
+      });
+
+      // Expand / Collapse All
+      function expandAllActive() {
+        document.querySelectorAll('.q-card').forEach(card => {
+          card.classList.add('is-open');
+          const toggle = card.querySelector('.q-toggle-btn');
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        });
+      }
+
+      function collapseAllActive() {
+        document.querySelectorAll('.q-card').forEach(card => {
+          card.classList.remove('is-open');
+          const toggle = card.querySelector('.q-toggle-btn');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      expandAllBtn.addEventListener('click', expandAllActive);
+      collapseAllBtn.addEventListener('click', collapseAllActive);
+
+      // Random Question Jumper
+      function jumpRandomQuestion() {
+        const cards = document.querySelectorAll('.q-card');
+        if (cards.length === 0) return;
+        const randomCard = cards[Math.floor(Math.random() * cards.length)];
+        randomCard.classList.add('is-open');
+        const toggle = randomCard.querySelector('.q-toggle-btn');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+
+        randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        randomCard.style.outline = '3px solid var(--primary)';
+        randomCard.style.outlineOffset = '2px';
+        setTimeout(() => {
+          randomCard.style.outline = '';
+          randomCard.style.outlineOffset = '';
+        }, 1600);
+      }
+
+      randomQuestionBtn.addEventListener('click', jumpRandomQuestion);
+
+      // Back to Top Button
+      window.addEventListener('scroll', () => {
+        backToTopBtn.classList.toggle('visible', window.scrollY > 280);
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Layout Switcher
+      function initLayout() {
+        const savedLayout = localStorage.getItem('interview_layout');
+        const isCompact = savedLayout === 'compact';
+        appContainer.classList.toggle('compact-mode', isCompact);
+        document.documentElement.classList.remove('preload-compact');
+        layoutBtnText.textContent = isCompact ? 'Wide' : 'Compact';
+      }
+
+      function toggleLayout() {
+        const isCompact = appContainer.classList.toggle('compact-mode');
+        layoutBtnText.textContent = isCompact ? 'Wide' : 'Compact';
+        localStorage.setItem('interview_layout', isCompact ? 'compact' : 'wide');
+        showToast(isCompact ? 'Compact View enabled' : 'Wide View enabled');
+      }
+
+      toggleLayoutBtn.addEventListener('click', toggleLayout);
+
+      // Dark / Light Theme Toggle
+      function toggleTheme() {
+        const currentMeta = document.querySelector('meta[name="color-scheme"]').content;
+        let isCurrentlyDark = currentMeta === 'dark';
+        if (currentMeta === 'light dark') {
+          isCurrentlyDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        const nextTheme = isCurrentlyDark ? 'light' : 'dark';
+        document.querySelector('meta[name="color-scheme"]').content = nextTheme;
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('interview_theme', nextTheme);
+        showToast(nextTheme === 'dark' ? 'Dark theme enabled' : 'Light theme enabled');
+      }
+
+      toggleThemeBtn.addEventListener('click', toggleTheme);
+
+      // --- Timed Mock Interview Quiz ---
+      let quizState = {
+        questions: [],
+        currentIndex: 0,
+        score: 0,
+        revealed: false,
+        startTime: 0,
+        timerInterval: null
+      };
+
+      const quizTopicSelect = document.getElementById('quizTopicSelect');
+      const quizLengthSelect = document.getElementById('quizLengthSelect');
+      const startQuizBtn = document.getElementById('startQuizBtn');
+      const quizSetupView = document.getElementById('quizSetupView');
+      const quizActiveView = document.getElementById('quizActiveView');
+      const quizSummaryView = document.getElementById('quizSummaryView');
+      const quizTimerBadge = document.getElementById('quizTimerBadge');
+      const quizCategoryBadge = document.getElementById('quizCategoryBadge');
+      const quizProgressBadge = document.getElementById('quizProgressBadge');
+      const quizProgressBar = document.getElementById('quizProgressBar');
+      const quizQuestionText = document.getElementById('quizQuestionText');
+      const quizPromptArea = document.getElementById('quizPromptArea');
+      const quizRevealBtn = document.getElementById('quizRevealBtn');
+      const quizAnswerBox = document.getElementById('quizAnswerBox');
+      const quizAnswerBody = document.getElementById('quizAnswerBody');
+      const quizScoreMissed = document.getElementById('quizScoreMissed');
+      const quizScorePartial = document.getElementById('quizScorePartial');
+      const quizScoreMastered = document.getElementById('quizScoreMastered');
+      const quizFinalScore = document.getElementById('quizFinalScore');
+      const quizFinalPercent = document.getElementById('quizFinalPercent');
+      const quizFinalTime = document.getElementById('quizFinalTime');
+      const restartQuizBtn = document.getElementById('restartQuizBtn');
+
+      function initQuizModal() {
+        quizTopicSelect.innerHTML = '';
+        const optAll = document.createElement('option');
+        optAll.value = 'all';
+        optAll.textContent = `All Domains (${totalQuestionCount} Questions)`;
+        quizTopicSelect.appendChild(optAll);
+
+        const optUnmastered = document.createElement('option');
+        optUnmastered.value = 'unmastered';
+        optUnmastered.textContent = 'Unmastered Only';
+        quizTopicSelect.appendChild(optUnmastered);
+
+        topics.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = `${t.name} (${t.data ? t.data.length : 0})`;
+          if (t.id === activeTabId) opt.selected = true;
+          quizTopicSelect.appendChild(opt);
+        });
+
+        quizSetupView.classList.remove('d-none');
+        quizActiveView.classList.add('d-none');
+        quizSummaryView.classList.add('d-none');
+        quizTimerBadge.textContent = '00:00';
+      }
+
+      function startMockInterview() {
+        let pool = [];
+        const chosenTopic = quizTopicSelect.value;
+        if (chosenTopic === 'all') {
+          topics.forEach(t => (t.data || []).forEach(q => pool.push({ ...q, topicId: t.id, topicName: t.name })));
+        } else if (chosenTopic === 'unmastered') {
+          topics.forEach(t => (t.data || []).forEach(q => {
+            if (!isMastered(t.id, q.question)) pool.push({ ...q, topicId: t.id, topicName: t.name });
+          }));
+        } else {
+          const t = topics.find(topic => topic.id === chosenTopic);
+          if (t && t.data) pool = t.data.map(q => ({ ...q, topicId: t.id, topicName: t.name }));
+        }
+
+        if (pool.length === 0) {
+          showToast('No questions available in this selection.');
+          return;
+        }
+
+        // Shuffle pool
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+
+        const count = Math.min(parseInt(quizLengthSelect.value, 10), pool.length);
+        quizState.questions = pool.slice(0, count);
+        quizState.currentIndex = 0;
+        quizState.score = 0;
+        quizState.revealed = false;
+        quizState.startTime = Date.now();
+
+        clearInterval(quizState.timerInterval);
+        quizState.timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - quizState.startTime) / 1000);
+          const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+          const secs = String(elapsed % 60).padStart(2, '0');
+          quizTimerBadge.textContent = `${mins}:${secs}`;
+        }, 1000);
+
+        quizSetupView.classList.add('d-none');
+        quizActiveView.classList.remove('d-none');
+        quizSummaryView.classList.add('d-none');
+        renderQuizCard();
+      }
+
+      function renderQuizCard() {
+        const total = quizState.questions.length;
+        const curr = quizState.questions[quizState.currentIndex];
+
+        quizCategoryBadge.textContent = (curr.topicName || 'TOPIC').toUpperCase();
+        quizProgressBadge.textContent = `Question ${quizState.currentIndex + 1} of ${total}`;
+        quizProgressBar.style.width = `${((quizState.currentIndex + 1) / total) * 100}%`;
+        quizQuestionText.textContent = curr.question;
+
+        if (quizState.revealed) {
+          quizPromptArea.classList.add('d-none');
+          quizAnswerBox.classList.remove('d-none');
+          quizAnswerBody.innerHTML = sanitizeAnswerHtml(curr.answer);
+          enhanceCodeBlocks(quizAnswerBody);
+        } else {
+          quizPromptArea.classList.remove('d-none');
+          quizAnswerBox.classList.add('d-none');
+        }
+      }
+
+      function handleQuizScore(points) {
+        quizState.score += points;
+        const curr = quizState.questions[quizState.currentIndex];
+        if (points === 1 && !isMastered(curr.topicId, curr.question)) {
+          toggleMastered(curr.topicId, curr.question);
+        }
+
+        if (quizState.currentIndex < quizState.questions.length - 1) {
+          quizState.currentIndex++;
+          quizState.revealed = false;
+          renderQuizCard();
+        } else {
+          finishMockInterview();
+        }
+      }
+
+      function finishMockInterview() {
+        clearInterval(quizState.timerInterval);
+        const total = quizState.questions.length;
+        const elapsed = Math.floor((Date.now() - quizState.startTime) / 1000);
+        const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const secs = String(elapsed % 60).padStart(2, '0');
+
+        quizFinalScore.textContent = `${quizState.score} / ${total}`;
+        quizFinalPercent.textContent = `${Math.round((quizState.score / total) * 100)}%`;
+        quizFinalTime.textContent = `${mins}:${secs}`;
+
+        quizActiveView.classList.add('d-none');
+        quizSummaryView.classList.remove('d-none');
+      }
+
+      startQuizBtn.addEventListener('click', startMockInterview);
+      quizRevealBtn.addEventListener('click', () => {
+        quizState.revealed = true;
+        renderQuizCard();
+      });
+      quizScoreMissed.addEventListener('click', () => handleQuizScore(0));
+      quizScorePartial.addEventListener('click', () => handleQuizScore(0.5));
+      quizScoreMastered.addEventListener('click', () => handleQuizScore(1));
+      restartQuizBtn.addEventListener('click', initQuizModal);
+      openQuizBtn.addEventListener('click', () => {
+        initQuizModal();
+        quizModal.show();
+      });
+
+      // --- Interactive Practice Flashcards Mode ---
+      let practiceState = {
+        pool: [],
+        currentIndex: 0,
+        revealed: false
+      };
+
+      const practiceCategorySelect = document.getElementById('practiceCategorySelect');
+      const practiceCounterBadge = document.getElementById('practiceCounterBadge');
+      const practiceProgressBar = document.getElementById('practiceProgressBar');
+      const practiceCardCategory = document.getElementById('practiceCardCategory');
+      const practiceCardMasterBtn = document.getElementById('practiceCardMasterBtn');
+      const practiceMasterText = document.getElementById('practiceMasterText');
+      const practiceCardStarBtn = document.getElementById('practiceCardStarBtn');
+      const practiceStarText = document.getElementById('practiceStarText');
+      const practiceQuestionText = document.getElementById('practiceQuestionText');
+      const practiceRevealArea = document.getElementById('practiceRevealArea');
+      const practiceRevealBtn = document.getElementById('practiceRevealBtn');
+      const practiceAnswerBox = document.getElementById('practiceAnswerBox');
+      const practiceAnswerBody = document.getElementById('practiceAnswerBody');
+      const practicePrevBtn = document.getElementById('practicePrevBtn');
+      const practiceNextBtn = document.getElementById('practiceNextBtn');
+      const practiceShuffleBtn = document.getElementById('practiceShuffleBtn');
+      const practiceCopyAnswerBtn = document.getElementById('practiceCopyAnswerBtn');
+
+      function initPracticeModal() {
+        practiceCategorySelect.innerHTML = '';
+        const optAll = document.createElement('option');
+        optAll.value = 'all';
+        optAll.textContent = `All Domains (${totalQuestionCount})`;
+        practiceCategorySelect.appendChild(optAll);
+
+        const optStarred = document.createElement('option');
+        optStarred.value = 'starred';
+        optStarred.textContent = `★ Starred (${Object.keys(starredStore).length})`;
+        practiceCategorySelect.appendChild(optStarred);
+
+        topics.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = `${t.name} (${t.data ? t.data.length : 0})`;
+          if (t.id === activeTabId) opt.selected = true;
+          practiceCategorySelect.appendChild(opt);
+        });
+
+        loadPracticeQuestions(practiceCategorySelect.value);
+      }
+
+      function loadPracticeQuestions(categoryVal) {
+        let pool = [];
+        if (categoryVal === 'all') {
+          topics.forEach(t => (t.data || []).forEach(qa => pool.push({ ...qa, topicId: t.id, topicName: t.name })));
+        } else if (categoryVal === 'starred') {
+          pool = getStarredList();
+        } else {
+          const topic = topics.find(t => t.id === categoryVal);
+          if (topic && topic.data) pool = topic.data.map(qa => ({ ...qa, topicId: topic.id, topicName: topic.name }));
+        }
+
+        practiceState.pool = pool;
+        practiceState.currentIndex = 0;
+        practiceState.revealed = false;
+        renderPracticeCard();
+      }
+
+      function renderPracticeCard() {
+        const total = practiceState.pool.length;
+        if (total === 0) {
+          practiceCardCategory.textContent = 'NO QUESTIONS';
+          practiceQuestionText.textContent = 'No questions available in this practice set.';
+          practiceRevealArea.classList.add('d-none');
+          practiceAnswerBox.classList.add('d-none');
+          practiceCounterBadge.textContent = '0 / 0';
+          practiceProgressBar.style.width = '0%';
+          return;
+        }
+
+        const curr = practiceState.pool[practiceState.currentIndex];
+        const topicId = curr.topicId || 'general';
+        const starred = isStarred(topicId, curr.question);
+        const mastered = isMastered(topicId, curr.question);
+
+        practiceCardCategory.textContent = (curr.topicName || 'TOPIC').toUpperCase();
+        practiceQuestionText.textContent = curr.question;
+        practiceCounterBadge.textContent = `${practiceState.currentIndex + 1} / ${total}`;
+        practiceProgressBar.style.width = `${((practiceState.currentIndex + 1) / total) * 100}%`;
+
+        // Star state
+        practiceStarText.textContent = starred ? 'Starred' : 'Star';
+        const starSvg = practiceCardStarBtn.querySelector('svg');
+        if (starSvg) {
+          starSvg.style.fill = starred ? 'var(--star-color)' : 'none';
+          starSvg.style.stroke = starred ? 'var(--star-color)' : 'currentColor';
+        }
+
+        // Master state
+        practiceMasterText.textContent = mastered ? 'Mastered' : 'Mark Mastered';
+        practiceCardMasterBtn.classList.toggle('action-btn-success', mastered);
+
+        if (practiceState.revealed) {
+          practiceRevealArea.classList.add('d-none');
+          practiceAnswerBox.classList.remove('d-none');
+          practiceAnswerBody.innerHTML = sanitizeAnswerHtml(curr.answer);
+          enhanceCodeBlocks(practiceAnswerBody);
+        } else {
+          practiceRevealArea.classList.remove('d-none');
+          practiceAnswerBox.classList.add('d-none');
+        }
+      }
+
+      function revealPracticeAnswer() {
+        practiceState.revealed = true;
+        renderPracticeCard();
+      }
+
+      function practiceNext() {
+        if (practiceState.pool.length === 0) return;
+        practiceState.currentIndex = (practiceState.currentIndex + 1) % practiceState.pool.length;
+        practiceState.revealed = false;
+        renderPracticeCard();
+      }
+
+      function practicePrev() {
+        if (practiceState.pool.length === 0) return;
+        practiceState.currentIndex = (practiceState.currentIndex - 1 + practiceState.pool.length) % practiceState.pool.length;
+        practiceState.revealed = false;
+        renderPracticeCard();
+      }
+
+      function practiceShuffle() {
+        if (practiceState.pool.length === 0) return;
+        for (let i = practiceState.pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [practiceState.pool[i], practiceState.pool[j]] = [practiceState.pool[j], practiceState.pool[i]];
+        }
+        practiceState.currentIndex = 0;
+        practiceState.revealed = false;
+        renderPracticeCard();
+        showToast('🔀 Shuffled questions');
+      }
+
+      practiceCategorySelect.addEventListener('change', () => loadPracticeQuestions(practiceCategorySelect.value));
+      practiceRevealBtn.addEventListener('click', revealPracticeAnswer);
+      practiceNextBtn.addEventListener('click', practiceNext);
+      practicePrevBtn.addEventListener('click', practicePrev);
+      practiceShuffleBtn.addEventListener('click', practiceShuffle);
+
+      practiceCardStarBtn.addEventListener('click', () => {
+        const curr = practiceState.pool[practiceState.currentIndex];
+        if (!curr) return;
+        toggleStar(curr.topicId || activeTabId, curr.topicName || '', curr.question, curr.answer);
+        renderPracticeCard();
+      });
+
+      practiceCardMasterBtn.addEventListener('click', () => {
+        const curr = practiceState.pool[practiceState.currentIndex];
+        if (!curr) return;
+        toggleMastered(curr.topicId || activeTabId, curr.question);
+        renderPracticeCard();
+      });
+
+      practiceCopyAnswerBtn.addEventListener('click', () => {
+        const curr = practiceState.pool[practiceState.currentIndex];
+        if (curr) copyQuestionAndAnswer(curr.question, curr.answer, practiceCopyAnswerBtn);
+      });
+
+      openPracticeBtn.addEventListener('click', () => {
+        initPracticeModal();
+        practiceModal.show();
+      });
+
+      // --- Stats Dashboard Modal ---
+      openStatsBtn.addEventListener('click', () => {
+        const totalMastered = Object.keys(masteredStore).length;
+        const totalStarred = Object.keys(starredStore).length;
+        const totalNotes = Object.keys(notesStore).filter(k => notesStore[k] && notesStore[k].trim()).length;
+
+        document.getElementById('dashTotalCount').textContent = totalQuestionCount;
+        document.getElementById('dashMasteredCount').textContent = totalMastered;
+        document.getElementById('dashStarredCount').textContent = totalStarred;
+        document.getElementById('dashNotesCount').textContent = totalNotes;
+
+        const breakdownContainer = document.getElementById('dashCategoryBreakdown');
+        breakdownContainer.innerHTML = '';
+
+        topics.forEach(t => {
+          const tTotal = t.data ? t.data.length : 0;
+          const tMastered = (t.data || []).filter(q => isMastered(t.id, q.question)).length;
+          const tPercent = tTotal > 0 ? Math.round((tMastered / tTotal) * 100) : 0;
+
+          const row = document.createElement('div');
+          row.className = 'p-2 border rounded-3';
+          row.style.background = 'var(--bg-surface-elevated)';
+          row.style.borderColor = 'var(--border-subtle)';
+          row.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="fw-bold small">${escapeHtml(t.fullTitle || t.name)}</span>
+              <span class="small text-muted">${tMastered} / ${tTotal} Mastered (${tPercent}%)</span>
+            </div>
+            <div class="progress" style="height: 6px; background: var(--border-subtle);">
+              <div class="progress-bar ${tPercent >= 70 ? 'bg-success' : (tPercent >= 30 ? 'bg-primary' : 'bg-warning')}" role="progressbar" style="width: ${tPercent}%"></div>
+            </div>
+          `;
+          breakdownContainer.appendChild(row);
+        });
+
+        statsModal.show();
+      });
+
+      // --- Data Management (Export Cheatsheet, Backup, Restore) ---
+      openDataBtn.addEventListener('click', () => dataModal.show());
+
+      // Export to Markdown Cheatsheet
+      document.getElementById('exportMarkdownBtn').addEventListener('click', () => {
+        let md = `# Interview Preparation Cheatsheet\n`;
+        md += `Generated on: ${new Date().toLocaleDateString()}\n`;
+        md += `Total Questions: ${totalQuestionCount} | Mastered: ${Object.keys(masteredStore).length} | Starred: ${Object.keys(starredStore).length}\n\n`;
+
+        // 1. Starred Section
+        const starred = getStarredList();
+        if (starred.length > 0) {
+          md += `## 🌟 Starred Questions (${starred.length})\n\n`;
+          starred.forEach((item, i) => {
+            const cleanAnswer = item.answer.replace(/<br\s*\/?>/gi, '\n').replace(/<\/?[^>]+(>|$)/g, '');
+            const note = getNote(item.topicId, item.question);
+            md += `### ${i + 1}. [${item.topicName || item.topicId}] ${item.question}\n\n`;
+            md += `**Answer:**\n${cleanAnswer}\n\n`;
+            if (note) md += `**My Notes:**\n> ${note}\n\n`;
+            md += `---\n\n`;
+          });
+        }
+
+        // 2. All Categories
+        topics.forEach(t => {
+          md += `## 📚 ${t.fullTitle || t.name}\n\n`;
+          (t.data || []).forEach((q, i) => {
+            const mastered = isMastered(t.id, q.question) ? ' [✓ Mastered]' : '';
+            const cleanAnswer = q.answer.replace(/<br\s*\/?>/gi, '\n').replace(/<\/?[^>]+(>|$)/g, '');
+            const note = getNote(t.id, q.question);
+            md += `### ${i + 1}. ${q.question}${mastered}\n\n`;
+            md += `**Answer:**\n${cleanAnswer}\n\n`;
+            if (note) md += `**My Notes:**\n> ${note}\n\n`;
+            md += `---\n\n`;
+          });
+        });
+
+        const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `interview_prep_cheatsheet_${Date.now()}.md`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Downloaded Markdown Cheatsheet!');
+      });
+
+      // Export JSON Backup
+      document.getElementById('exportBackupJsonBtn').addEventListener('click', () => {
+        const backup = {
+          version: 2,
+          date: new Date().toISOString(),
+          starred: starredStore,
+          mastered: masteredStore,
+          notes: notesStore
+        };
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `interview_prep_backup_${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Downloaded JSON Backup!');
+      });
+
+      // Import JSON Backup
+      const importFileInput = document.getElementById('importFileInput');
+      document.getElementById('triggerImportBtn').addEventListener('click', () => importFileInput.click());
+
+      importFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (data.starred) starredStore = data.starred;
+            if (data.mastered) masteredStore = data.mastered;
+            if (data.notes) notesStore = data.notes;
+
+            localStorage.setItem(STARRED_KEY, JSON.stringify(starredStore));
+            localStorage.setItem(MASTERED_KEY, JSON.stringify(masteredStore));
+            localStorage.setItem(NOTES_KEY, JSON.stringify(notesStore));
+
+            updateAllStats();
+            renderCategoryTabs();
+            renderTabContent();
+            dataModal.hide();
+            showToast('Backup restored successfully!');
+          } catch (err) {
+            alert('Invalid backup JSON file.');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Reset All Data
+      document.getElementById('resetAllDataBtn').addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset all bookmarks, mastered statuses, and notes? This cannot be undone.')) {
+          starredStore = {};
+          masteredStore = {};
+          notesStore = {};
+          localStorage.removeItem(STARRED_KEY);
+          localStorage.removeItem(MASTERED_KEY);
+          localStorage.removeItem(NOTES_KEY);
+          updateAllStats();
+          renderCategoryTabs();
+          renderTabContent();
+          dataModal.hide();
+          showToast('All progress reset.');
+        }
+      });
+
+      openShortcutsBtn.addEventListener('click', () => shortcutsModal.show());
+
+      // --- Global Keyboard Shortcuts ---
+      document.addEventListener('keydown', (e) => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        const isEditing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag);
+
+        const isPracticeOpen = document.getElementById('practiceModal').classList.contains('show');
+        const isQuizOpen = document.getElementById('quizModal').classList.contains('show');
+
+        if (isPracticeOpen) {
+          if (e.code === 'Space' && !isEditing) {
+            e.preventDefault();
+            revealPracticeAnswer();
+          } else if (e.key === 'ArrowRight' && !isEditing) {
+            e.preventDefault();
+            practiceNext();
+          } else if (e.key === 'ArrowLeft' && !isEditing) {
+            e.preventDefault();
+            practicePrev();
+          } else if (e.key.toLowerCase() === 's' && !isEditing) {
+            e.preventDefault();
+            const curr = practiceState.pool[practiceState.currentIndex];
+            if (curr) toggleStar(curr.topicId || activeTabId, curr.topicName || '', curr.question, curr.answer);
+            renderPracticeCard();
+          }
+          return;
+        }
+
+        if (isQuizOpen) {
+          if (e.code === 'Space' && !isEditing) {
+            e.preventDefault();
+            quizState.revealed = true;
+            renderQuizCard();
+          }
+          return;
+        }
+
+        // Global shortcuts
+        if ((e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) && !isEditing) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        } else if (e.key === 'Escape') {
+          if (document.activeElement === searchInput) searchInput.blur();
+          if (searchInput.value) clearSearch();
+        } else if (e.altKey && e.key.toLowerCase() === 'e') {
+          e.preventDefault();
+          expandAllActive();
+        } else if (e.altKey && e.key.toLowerCase() === 'c') {
+          e.preventDefault();
+          collapseAllActive();
+        } else if (e.altKey && e.key.toLowerCase() === 'p') {
+          e.preventDefault();
+          initPracticeModal();
+          practiceModal.show();
+        } else if (e.altKey && e.key.toLowerCase() === 'q') {
+          e.preventDefault();
+          initQuizModal();
+          quizModal.show();
+        } else if (e.altKey && e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          openStatsBtn.click();
+        } else if (e.altKey && e.key.toLowerCase() === 'r') {
+          e.preventDefault();
+          jumpRandomQuestion();
+        } else if (e.altKey && e.key.toLowerCase() === 'w') {
+          e.preventDefault();
+          toggleLayout();
+        } else if (e.altKey && e.key.toLowerCase() === 't') {
+          e.preventDefault();
+          toggleTheme();
+        } else if (e.key === '?' && !isEditing) {
+          e.preventDefault();
+          shortcutsModal.show();
+        }
+      });
+
+      // --- Initialization ---
+      initLayout();
+      updateAllStats();
+      renderCategoryTabs();
+      renderTabContent();
+
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Backup Files
+*.bak
+*.tmp
+
+# Editor Directories
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log*
